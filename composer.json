@@ -1,0 +1,19 @@
+{
+  "name": "sms77/shopware5-plugin",
+  "description": "Shopware 5 plugin to programatically make us of the sms77io SMS gateway",
+  "keywords": [
+    "shopware",
+    "sms"
+  ],
+  "homepage": "http://www.sms77.io",
+  "type": "shopware-backend-plugin",
+  "license": "MIT",
+  "require": {
+    "php": "^7.2",
+    "sms77/api": "dev-master",
+    "ext-curl": "*"
+  },
+  "extra": {
+    "installer-name": "Sms77ShopwareApi"
+  }
+}

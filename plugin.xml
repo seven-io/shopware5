@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
+    <label lang="de">Sms77io API</label>
+    <label lang="en">Sms77io API</label>
+    <version>1.0.0</version>
+    <copyright>© by sms77 e.K.</copyright>
+    <license>MIT</license>
+    <link>https://sms77.io</link>
+    <author>sms77 e.K.</author>
+
+    <compatibility minVersion="5.3.0"/>
+
+    <changelog version="1.0.0">
+        <changes lang="de">Erste Veröffentlichung</changes>
+        <changes lang="en">Initial Release</changes>
+    </changelog>
+</plugin>
