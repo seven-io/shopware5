@@ -62,7 +62,7 @@ class OrderSubscriber implements EventSubscriber
                 $extra['from'] = $config['from'];
             }
 
-            $client = new Client($config['apiKey']);
+            $client = new Client($config['apiKey'], 'shopware');
             $client->sms(
                 '' === $order->getShipping()->getPhone() ? $order->getBilling()->getPhone() : $order->getShipping()->getPhone(),
                 $this->getSmsText($newStatus->getId(), $config),

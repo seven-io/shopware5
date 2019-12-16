@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///var/www/Sms77ShopwareApi/.idea/Sms77ShopwareApi.iml" filepath="/var/www/Sms77ShopwareApi/.idea/Sms77ShopwareApi.iml" />
-      <module fileurl="file:///var/www/html/shopware/.idea/shopware.iml" filepath="/var/www/html/shopware/.idea/shopware.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/shopware5-plugin.iml" filepath="$PROJECT_DIR$/.idea/shopware5-plugin.iml" />
     </modules>
   </component>

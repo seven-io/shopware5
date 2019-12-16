@@ -10,7 +10,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.2",
-    "sms77/api": "dev-master",
+    "sms77/api": "^1.0",
     "ext-curl": "*"
   },
   "extra": {
