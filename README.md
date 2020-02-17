@@ -28,4 +28,4 @@ Please see [License File](LICENSE) for more information.
 - Add more translations
 
 #### Need help?
-You are more than welcome to contact us via [sms77.io](https://sms77.io) in order to get assistance.
+You are more than welcome to contact us via [sms77.io](https://www.sms77.io) in order to get assistance.

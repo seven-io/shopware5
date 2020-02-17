@@ -81,7 +81,7 @@ class OrderSubscriber implements EventSubscriber
             8 => 'OrderStateClarificationRequired',
             13 => 'PaymentState1stReminder',
             14 => 'PaymentState2ndReminder',
-            15 => 'PaymentState3rdReminder'
+            15 => 'PaymentState3rdReminder',
         ];
 
         if (array_key_exists($statusId, $mappings)) {
@@ -90,6 +90,12 @@ class OrderSubscriber implements EventSubscriber
             if (array_key_exists($cfgKey, $config)) {
                 $text = $config[$cfgKey];
             }
+        }
+
+        if (array_key_exists('signature', $config) && mb_strlen($config['signature'])) {
+            $text = 'prepend' === $config['signaturePosition']
+                ? $text + $config['signature']
+                : $config['signature'] + $text;
         }
 
         return $text;
@@ -102,6 +108,7 @@ class OrderSubscriber implements EventSubscriber
         foreach ($names as $name) {
             try {
                 $reflection = new \ReflectionClassConstant(Status::class, $name);
+
                 if (strtoupper($name) === $reflection->getName()) {
                     $ids[] = $reflection->getValue();
                 }

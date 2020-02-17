@@ -29,14 +29,20 @@ class Sms77ShopwareApi extends Plugin
         if ($valid) {
             $pluginManager = Shopware()->Container()->get('shopware_plugininstaller.plugin_manager');
 
-            try {
-                $pluginManager->saveConfigElement(
-                    $pluginManager->getPluginByName((new ReflectionClass($this))->getShortName()),
-                    'from',
-                    Shopware()->Config()->get('shop_name'),
-                    Shopware()->Models()->getRepository(Shop::class)->findOneBy(['default' => true]));
-            } catch (ReflectionException $e) {
-            }
+            $pluginName = $pluginManager->getPluginByName((new ReflectionClass($this))->getShortName());
+            $shop = Shopware()->Models()->getRepository(Shop::class)->findOneBy(['default' => true]);
+
+            $pluginManager->saveConfigElement(
+                $pluginName,
+                'from',
+                Shopware()->Config()->get('shop_name'),
+                $shop);
+
+            $pluginManager->saveConfigElement(
+                $pluginName,
+                'signaturePosition',
+                'append',
+                $shop);
         }
 
         parent::install($installContext);

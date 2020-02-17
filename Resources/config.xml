@@ -15,7 +15,9 @@
             <name>apiKey</name>
             <label lang="de">API-Schlüssel</label>
             <label lang="en">API key</label>
-            <description lang="de">Ein API-Schlüssel wird benötigt um SMS senden zu können. Erfahren Sie mehr auf sms77.io.</description>
+            <description lang="de">Ein API-Schlüssel wird benötigt um SMS senden zu können. Erfahren Sie mehr auf
+                sms77.io.
+            </description>
             <description lang="en">An API key is needed in order to send SMS. Get yours now at sms77.io.</description>
         </element>
 
@@ -78,7 +80,9 @@
             <name>textOnOrderStateCancelled</name>
             <label lang="de">Stornonachricht</label>
             <label lang="en">Cancellation message</label>
-            <value>Dear customer. We are sorry about the cancelled order. We hope to serve you again soon. Best regards!</value>
+            <value>Dear customer. We are sorry about the cancelled order. We hope to serve you again soon. Best
+                regards!
+            </value>
             <description lang="de">Definiert den SMS-Inhalt bei Stornierungen.</description>
             <description lang="en">Defines the text content for cancellations.</description>
         </element>
@@ -87,7 +91,9 @@
             <name>textOnOrderStateReadyForDelivery</name>
             <label lang="de">Versandnachricht</label>
             <label lang="en">Shipping message</label>
-            <value>Dear customer. Your order is ready to be shipped. Log in to your customer account for more information. Best regards!</value>
+            <value>Dear customer. Your order is ready to be shipped. Log in to your customer account for more
+                information. Best regards!
+            </value>
             <description lang="de">Definiert den SMS-Inhalt bei Versandbestätigung.</description>
             <description lang="en">Defines the text content for shipping confirmation.</description>
         </element>
@@ -96,7 +102,9 @@
             <name>textOnOrderStateCompletelyDelivered</name>
             <label lang="de">Ausliefernachricht</label>
             <label lang="en">Delivery message</label>
-            <value>Dear customer. Your order has just been delivered by our logistics partner. Thank you for shopping. Enjoy your goods and best regards!</value>
+            <value>Dear customer. Your order has just been delivered by our logistics partner. Thank you for shopping.
+                Enjoy your goods and best regards!
+            </value>
             <description lang="de">Definiert den SMS-Inhalt bei erfolgter Auslieferung.</description>
             <description lang="en">Defines the text content for delivery confirmation.</description>
         </element>
@@ -105,7 +113,9 @@
             <name>textOnOrderStateClarificationRequired</name>
             <label lang="de">Klärungsnachricht</label>
             <label lang="en">Clarification message</label>
-            <value>Dear customer. Your order needs some clarification. Please contact us as soon as possible in order to get your order fulfilled. Best regards!</value>
+            <value>Dear customer. Your order needs some clarification. Please contact us as soon as possible in order to
+                get your order fulfilled. Best regards!
+            </value>
             <description lang="de">Definiert den SMS-Inhalt bei Klärungsbedarf.</description>
             <description lang="en">Defines the text content for clarification requests.</description>
         </element>
@@ -114,7 +124,9 @@
             <name>textOnPaymentState1stReminder</name>
             <label lang="de">Erinnerungsnachricht #1</label>
             <label lang="en">1st reminder message</label>
-            <value>Dear customer. This is just a little reminder that your order still needs to be paid before it gets shipped. Best regards!</value>
+            <value>Dear customer. This is just a little reminder that your order still needs to be paid before it gets
+                shipped. Best regards!
+            </value>
             <description lang="de">Definiert den SMS-Inhalt für die erste Erinnerungsnachricht.</description>
             <description lang="en">Defines the text content for the first reminder.</description>
         </element>
@@ -123,7 +135,9 @@
             <name>textOnPaymentState2ndReminder</name>
             <label lang="de">Erinnerungsnachricht #2</label>
             <label lang="en">2nd reminder message</label>
-            <value>Dear customer. We hereby inform you again that your order is still unpaid as of now. Please hurry in order to get it shipped quickly. Best regards!</value>
+            <value>Dear customer. We hereby inform you again that your order is still unpaid as of now. Please hurry in
+                order to get it shipped quickly. Best regards!
+            </value>
             <description lang="de">Definiert den SMS-Inhalt für die zweite Erinnerungsnachricht.</description>
             <description lang="en">Defines the text content for the second reminder.</description>
         </element>
@@ -132,7 +146,9 @@
             <name>textOnPaymentState3rdReminder</name>
             <label lang="de">Erinnerungsnachricht #3</label>
             <label lang="en">3rd reminder message</label>
-            <value>Dear customer. This is the last chance for you to pay for your order before we can finally ship it to you. Best regards!</value>
+            <value>Dear customer. This is the last chance for you to pay for your order before we can finally ship it to
+                you. Best regards!
+            </value>
             <description lang="de">Definiert den SMS-Inhalt für die dritte Erinnerungsnachricht.</description>
             <description lang="en">Defines the text content for the third reminder.</description>
         </element>
@@ -143,6 +159,35 @@
             <label lang="en">Sender</label>
             <description lang="de">Definiert die Absenderkennung der übermittelten Nachrichten.</description>
             <description lang="en">Defines the sender name for transmitted messages.</description>
+        </element>
+
+        <element type="textarea" scope="locale">
+            <name>signature</name>
+            <label lang="de">Signatur</label>
+            <label lang="en">Signature</label>
+            <description lang="de">Text, welcher jeder ausgehenden Nachricht hinzugefügt wird.</description>
+            <description lang="en">Text to add to every outgoing message.</description>
+        </element>
+
+        <element type="select">
+            <name>signaturePosition</name>
+            <label lang="de">Signatur-Position</label>
+            <label lang="en">Signature Position</label>
+            <description lang="de">Bestimmt, wo die Signatur in der Nachricht eingefügt wird.</description>
+            <description lang="en">Defines where in the message to add the signature.</description>
+            <store>
+                <option>
+                    <value>append</value>
+                    <label lang="de">Vor Nachricht</label>
+                    <label lang="en">Append</label>
+                </option>
+
+                <option>
+                    <value>prepend</value>
+                    <label lang="de">Hinter Nachricht</label>
+                    <label lang="en">Prepend</label>
+                </option>
+            </store>
         </element>
     </elements>
 </config>
