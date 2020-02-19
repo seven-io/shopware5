@@ -7,6 +7,8 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
+use Exception;
+use ReflectionClassConstant;
 use Shopware\Models\Order\Order;
 use Shopware\Models\Order\Status;
 use Sms77\Api\Client;
@@ -26,12 +28,6 @@ class OrderSubscriber implements EventSubscriber
         return [Events::preUpdate];
     }
 
-    private function log($data): void
-    {
-        $debug = Debug::dump($data, 2, true, false);
-        Shopware()->Container()->get('pluginlogger')->info($debug);
-    }
-
     public function preUpdate(PreUpdateEventArgs $eventArgs): void
     {
         /** @var Status|null $newStatus */
@@ -49,28 +45,35 @@ class OrderSubscriber implements EventSubscriber
             return;
         }
 
-        $config = Shopware()->Container()->get('shopware.plugin.cached_config_reader')->getByPluginName('Sms77ShopwareApi');
-        if (!$config['enabled'] || !isset($config['apiKey'])) {
+        $pluginConfig = Shopware()->Container()->get('shopware.plugin.cached_config_reader')
+            ->getByPluginName('Sms77ShopwareApi');
+        if (!$pluginConfig['sms77enabled'] || !isset($pluginConfig['sms77apiKey'])) {
             return;
         }
 
-        $newStatus = $eventArgs->getNewValue($isPaymentStatusChanged ? self::FIELD_PAYMENT_STATUS : self::FIELD_ORDER_STATUS);
+        $newStatus =
+            $eventArgs->getNewValue($isPaymentStatusChanged ? self::FIELD_PAYMENT_STATUS : self::FIELD_ORDER_STATUS);
 
-        if (null !== $newStatus && in_array($newStatus->getId(), $this->statusNamesToIds($config['events']), true)) {
+        $isValidEvent = in_array($newStatus->getId(), $this->statusNamesToIds($pluginConfig['sms77events']), true);
+
+        if (null !== $newStatus && $isValidEvent) {
             $extra = [];
-            if (isset($config['from'])) {
-                $extra['from'] = $config['from'];
+            if (isset($pluginConfig['sms77from'])) {
+                $extra['from'] = $pluginConfig['sms77from'];
             }
 
-            $client = new Client($config['apiKey'], 'shopware');
+            $client = new Client($pluginConfig['sms77apiKey'], 'shopware');
+            $to = '' === $order->getShipping()->getPhone()
+                ? $order->getBilling()->getPhone()
+                : $order->getShipping()->getPhone();
             $client->sms(
-                '' === $order->getShipping()->getPhone() ? $order->getBilling()->getPhone() : $order->getShipping()->getPhone(),
-                $this->getSmsText($newStatus->getId(), $config),
+                $to,
+                $this->getSmsText($newStatus->getId(), $pluginConfig),
                 $extra);
         }
     }
 
-    private function getSmsText(int $statusId, array $config): ?string
+    private function getSmsText(int $statusId, array $pluginConfig): ?string
     {
         $text = null;
 
@@ -85,17 +88,17 @@ class OrderSubscriber implements EventSubscriber
         ];
 
         if (array_key_exists($statusId, $mappings)) {
-            $cfgKey = 'textOn' . $mappings[$statusId];
+            $cfgKey = 'sms77textOn' . $mappings[$statusId];
 
-            if (array_key_exists($cfgKey, $config)) {
-                $text = $config[$cfgKey];
+            if (array_key_exists($cfgKey, $pluginConfig)) {
+                $text = $pluginConfig[$cfgKey];
             }
         }
 
-        if (array_key_exists('signature', $config) && mb_strlen($config['signature'])) {
-            $text = 'prepend' === $config['signaturePosition']
-                ? $text + $config['signature']
-                : $config['signature'] + $text;
+        if (array_key_exists('sms77signature', $pluginConfig) && mb_strlen($pluginConfig['sms77signature'])) {
+            $text = 'prepend' === $pluginConfig['sms77signaturePosition']
+                ? $text + $pluginConfig['sms77signature']
+                : $pluginConfig['sms77signature'] + $text;
         }
 
         return $text;
@@ -107,12 +110,12 @@ class OrderSubscriber implements EventSubscriber
 
         foreach ($names as $name) {
             try {
-                $reflection = new \ReflectionClassConstant(Status::class, $name);
+                $reflection = new ReflectionClassConstant(Status::class, $name);
 
                 if (strtoupper($name) === $reflection->getName()) {
                     $ids[] = $reflection->getValue();
                 }
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
             }
         }
 

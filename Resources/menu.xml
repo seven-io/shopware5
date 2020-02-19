@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.2/engine/Shopware/Components/Plugin/schema/menu.xsd"
+>
+    <entries>
+        <entry>
+            <name>Sms77ApiPlugin</name>
+            <label lang="en">Sms77ApiPlugin</label>
+            <label lang="de">Sms77ApiPlugin</label>
+            <controller>Sms77Api</controller>
+            <action>index</action>
+            <class>sprite-application-block</class>
+            <parent identifiedBy="controller">Marketing</parent>
+            <onclick>Shopware.ModuleManager.createSimplifiedModule("Sms77Api", { "title": "sms77io" })
+            </onclick>
+        </entry>
+    </entries>
+</menu>

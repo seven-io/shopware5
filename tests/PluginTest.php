@@ -2,8 +2,8 @@
 
 namespace Sms77ShopwareApi\Tests;
 
-use Sms77ShopwareApi\Sms77ShopwareApi as Plugin;
 use Shopware\Components\Test\Plugin\TestCase;
+use Sms77ShopwareApi\Sms77ShopwareApi as Plugin;
 
 class PluginTest extends TestCase
 {

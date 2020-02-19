@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sms77_api.subscriber.order" class="Sms77ShopwareApi\Subscriber\OrderSubscriber">
-            <tag name="doctrine.event_subscriber" />
+            <tag name="doctrine.event_subscriber"/>
         </service>
     </services>
 </container>
