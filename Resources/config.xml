@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="../../../../engine/Shopware/Components/Plugin/schema/config.xsd">
     <elements>
         <element type="boolean" required="true">
-            <name>enabled</name>
+            <name>sms77enabled</name>
             <label lang="de">Aktiviert</label>
             <label lang="en">Enabled</label>
             <value>0</value>
@@ -12,7 +12,7 @@
         </element>
 
         <element type="text" required="true">
-            <name>apiKey</name>
+            <name>sms77apiKey</name>
             <label lang="de">API-Schlüssel</label>
             <label lang="en">API key</label>
             <description lang="de">Ein API-Schlüssel wird benötigt um SMS senden zu können. Erfahren Sie mehr auf
@@ -22,7 +22,7 @@
         </element>
 
         <element type="select" required="true">
-            <name>events</name>
+            <name>sms77events</name>
             <label lang="de">Ereignisse</label>
             <label lang="en">Events</label>
             <description lang="de">Definiert die Ereignisse zum Versenden von SMS.</description>
@@ -77,7 +77,7 @@
         </element>
 
         <element type="textarea" scope="locale" required="true">
-            <name>textOnOrderStateCancelled</name>
+            <name>sms77textOnOrderStateCancelled</name>
             <label lang="de">Stornonachricht</label>
             <label lang="en">Cancellation message</label>
             <value>Dear customer. We are sorry about the cancelled order. We hope to serve you again soon. Best
@@ -88,7 +88,7 @@
         </element>
 
         <element type="textarea" scope="locale" required="true">
-            <name>textOnOrderStateReadyForDelivery</name>
+            <name>sms77textOnOrderStateReadyForDelivery</name>
             <label lang="de">Versandnachricht</label>
             <label lang="en">Shipping message</label>
             <value>Dear customer. Your order is ready to be shipped. Log in to your customer account for more
@@ -99,7 +99,7 @@
         </element>
 
         <element type="textarea" scope="locale" required="true">
-            <name>textOnOrderStateCompletelyDelivered</name>
+            <name>sms77textOnOrderStateCompletelyDelivered</name>
             <label lang="de">Ausliefernachricht</label>
             <label lang="en">Delivery message</label>
             <value>Dear customer. Your order has just been delivered by our logistics partner. Thank you for shopping.
@@ -110,7 +110,7 @@
         </element>
 
         <element type="textarea" scope="locale" required="true">
-            <name>textOnOrderStateClarificationRequired</name>
+            <name>sms77textOnOrderStateClarificationRequired</name>
             <label lang="de">Klärungsnachricht</label>
             <label lang="en">Clarification message</label>
             <value>Dear customer. Your order needs some clarification. Please contact us as soon as possible in order to
@@ -121,7 +121,7 @@
         </element>
 
         <element type="textarea" scope="locale" required="true">
-            <name>textOnPaymentState1stReminder</name>
+            <name>sms77textOnPaymentState1stReminder</name>
             <label lang="de">Erinnerungsnachricht #1</label>
             <label lang="en">1st reminder message</label>
             <value>Dear customer. This is just a little reminder that your order still needs to be paid before it gets
@@ -132,7 +132,7 @@
         </element>
 
         <element type="textarea" scope="locale" required="true">
-            <name>textOnPaymentState2ndReminder</name>
+            <name>sms77textOnPaymentState2ndReminder</name>
             <label lang="de">Erinnerungsnachricht #2</label>
             <label lang="en">2nd reminder message</label>
             <value>Dear customer. We hereby inform you again that your order is still unpaid as of now. Please hurry in
@@ -143,7 +143,7 @@
         </element>
 
         <element type="textarea" scope="locale" required="true">
-            <name>textOnPaymentState3rdReminder</name>
+            <name>sms77textOnPaymentState3rdReminder</name>
             <label lang="de">Erinnerungsnachricht #3</label>
             <label lang="en">3rd reminder message</label>
             <value>Dear customer. This is the last chance for you to pay for your order before we can finally ship it to
@@ -154,7 +154,7 @@
         </element>
 
         <element type="text">
-            <name>from</name>
+            <name>sms77from</name>
             <label lang="de">Absenderkennung</label>
             <label lang="en">Sender</label>
             <description lang="de">Definiert die Absenderkennung der übermittelten Nachrichten.</description>
@@ -162,15 +162,16 @@
         </element>
 
         <element type="textarea" scope="locale">
-            <name>signature</name>
+            <name>sms77signature</name>
             <label lang="de">Signatur</label>
             <label lang="en">Signature</label>
+            <value/>
             <description lang="de">Text, welcher jeder ausgehenden Nachricht hinzugefügt wird.</description>
             <description lang="en">Text to add to every outgoing message.</description>
         </element>
 
         <element type="select">
-            <name>signaturePosition</name>
+            <name>sms77signaturePosition</name>
             <label lang="de">Signatur-Position</label>
             <label lang="en">Signature Position</label>
             <description lang="de">Bestimmt, wo die Signatur in der Nachricht eingefügt wird.</description>
@@ -186,6 +187,27 @@
                     <value>prepend</value>
                     <label lang="de">Hinter Nachricht</label>
                     <label lang="en">Prepend</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select">
+            <name>sms77type</name>
+            <label lang="de">SMS Typ</label>
+            <label lang="en">SMS Type</label>
+            <description lang="de">Bestimmt den SMS-Typen.</description>
+            <description lang="en">Defines the SMS type.</description>
+            <store>
+                <option>
+                    <value>direct</value>
+                    <label lang="de">Direct</label>
+                    <label lang="en">Direct</label>
+                </option>
+
+                <option>
+                    <value>economy</value>
+                    <label lang="de">Economy</label>
+                    <label lang="en">Economy</label>
                 </option>
             </store>
         </element>
