@@ -49,8 +49,6 @@ class Sms77ShopwareApi extends Plugin
 
         $saveConfigElement('signaturePosition', 'append');
 
-        $saveConfigElement('type', 'direct');
-
         parent::install($installContext);
     }
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use Doctrine\DBAL\Driver\PDOStatement;
 use Doctrine\ORM\AbstractQuery;
@@ -53,16 +53,6 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
                 $from = mb_strlen($from) ? $from : 'sms77io';
             }
 
-            $type = $request->getParam('type');
-            $isValidType = function () use ($type) {
-                return in_array($type, ['direct', 'economy']);
-            };
-            if (!$isValidType()) {
-                $type = $pluginConfig['sms77type'];
-                $type = $isValidType() ? $type : 'direct';
-            }
-
-
             $getCustomers = function () use ($request, $countries, $modelManager) {
                 $customerGroups = $request->getParam('customerGroups');
 
@@ -113,7 +103,7 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
                 }
 
                 try {
-                    $extras = array_merge(compact('type', 'from'), ['json' => true]);
+                    $extras = array_merge(compact( 'from'), ['json' => true]);
 
                     $res = $client->sms($phone, $text, $extras);
                     $res = (array)json_decode($res);

@@ -92,25 +92,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="type">SMS Type</label>
-                        <div class="col-sm-10">
-                            <fieldset id="type">
-                                <label for="direct">
-                                    Direct
-                                    <input type="radio" id="direct" value="direct" name="type"
-                                           checked="{('direct'=={config name=sms77type})?true:false}">
-                                </label>
-
-                                <label for="economy">
-                                    Economy
-                                    <input type="radio" id="economy" value="economy" name="type"
-                                           checked="{('economy'=={config name=sms77type})?true:false}">
-                                </label>
-                            </fieldset>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary">Send</button>
                         </div>

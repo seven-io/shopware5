@@ -17,17 +17,5 @@
 <script src="{link file="backend/_resources/js/jquery-2.1.4.min.js"}"></script>
 <script src="{link file="backend/_resources/js/bootstrap.min.js"}"></script>
 
-{block name="content/layout/javascript"}
-    <script>
-        $(function () {
-            const $type = $('fieldset[name="type"] input[type="radio"]');
-
-            $type.on('change', function () {
-                $type.not(this).prop('checked', false);
-            });
-        });
-    </script>
-{/block}
-{block name="content/javascript"}{/block}
 </body>
 </html>

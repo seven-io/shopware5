@@ -190,26 +190,5 @@
                 </option>
             </store>
         </element>
-
-        <element type="select">
-            <name>sms77type</name>
-            <label lang="de">SMS Typ</label>
-            <label lang="en">SMS Type</label>
-            <description lang="de">Bestimmt den SMS-Typen.</description>
-            <description lang="en">Defines the SMS type.</description>
-            <store>
-                <option>
-                    <value>direct</value>
-                    <label lang="de">Direct</label>
-                    <label lang="en">Direct</label>
-                </option>
-
-                <option>
-                    <value>economy</value>
-                    <label lang="de">Economy</label>
-                    <label lang="en">Economy</label>
-                </option>
-            </store>
-        </element>
     </elements>
 </config>
