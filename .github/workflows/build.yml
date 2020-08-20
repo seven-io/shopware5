@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Prepare ZIP
+        id: prepare_zip
+        run: |
+          PLUGIN_NAME=$(cat composer.json | jq -r '.extra."installer-name"? | select(. != null)')
+          PLUGIN_VERSION=$(grep -oP '(?<=version>)[^<]+' "plugin.xml")
+          ARCHIVE_NAME="sms77-shopware5-v${PLUGIN_VERSION}.zip"
+          echo "::set-output name=version::${PLUGIN_VERSION}"
+          echo "::set-output name=archive_name::${ARCHIVE_NAME}"
+          mkdir -p $PLUGIN_NAME
+          rsync -av --progress . $PLUGIN_NAME --exclude $PLUGIN_NAME --exclude=".*"
+          zip -qq -r $ARCHIVE_NAME $PLUGIN_NAME
+          rm -rf $PLUGIN_NAME
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: true
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./${{ steps.prepare_zip.outputs.archive_name }}
+          asset_name: ${{ steps.prepare_zip.outputs.archive_name }}
+          asset_content_type: application/zip

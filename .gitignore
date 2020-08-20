@@ -4,4 +4,4 @@
 out
 gen
 .releases/
-Sms77ShopwareApi/vendor
+vendor/

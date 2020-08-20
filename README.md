@@ -2,7 +2,7 @@
 # Sms77.io Shopware5 Plugin
 
 ## About
-A Shopware 5 plugin to programatically make use of the Sms77.io SMS gateway. 
+A Shopware 5 plugin to programmatically make use of the Sms77.io SMS gateway. 
 
 Currently supported events:
 - ORDER_STATE_CANCELLED
