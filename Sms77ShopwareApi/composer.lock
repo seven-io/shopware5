@@ -1,0 +1,77 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "b21c5056f7a37fa34fd5015407be27eb",
+    "packages": [
+        {
+            "name": "sms77/api",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sms77io/php-api.git",
+                "reference": "dbd3b3e33febaa4227542150a2affbdf92f3681b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sms77io/php-api/zipball/dbd3b3e33febaa4227542150a2affbdf92f3681b",
+                "reference": "dbd3b3e33febaa4227542150a2affbdf92f3681b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-curl": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "ext-simplexml": "*",
+                "ext-soap": "*",
+                "phpunit/phpunit": "5.7.27"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sms77\\Api\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "André Matthies",
+                    "email": "a.matthies@sms77.io",
+                    "homepage": "http://www.sms77.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple PHP library for making CURL requests to the sms77.io gateway.",
+            "homepage": "https://github.com/sms77io/php-api",
+            "keywords": [
+                "2fa",
+                "gateway",
+                "sms"
+            ],
+            "time": "2020-02-13T14:39:27+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^7.2",
+        "ext-curl": "*",
+        "ext-mbstring": "*",
+        "ext-json": "*"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}

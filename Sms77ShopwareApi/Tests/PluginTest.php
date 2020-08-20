@@ -2,19 +2,19 @@
 
 namespace Sms77ShopwareApi\Tests;
 
+use ReflectionClass;
 use Shopware\Components\Test\Plugin\TestCase;
 use Sms77ShopwareApi\Sms77ShopwareApi as Plugin;
 
-class PluginTest extends TestCase
-{
+class PluginTest extends TestCase {
     protected static $ensureLoadedPlugins = [
-        'Sms77ShopwareApi' => []
+        'Sms77ShopwareApi' => [],
     ];
 
-    public function testCanCreateInstance()
-    {
+    public function testCanCreateInstance() {
         /** @var Plugin $plugin */
-        $plugin = Shopware()->Container()->get('kernel')->getPlugins()['Sms77ShopwareApi'];
+        $plugin = Shopware()->Container()->get('kernel')
+            ->getPlugins()[(new ReflectionClass(Plugin::class))->getShortName()];
 
         $this->assertInstanceOf(Plugin::class, $plugin);
     }

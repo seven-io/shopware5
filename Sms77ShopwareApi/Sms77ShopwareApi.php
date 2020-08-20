@@ -11,6 +11,10 @@ use Sms77\Api\Exception\InvalidOptionalArgumentException;
 use Sms77\Api\Validator\SmsValidator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
 class Sms77ShopwareApi extends Plugin
 {
     public function build(ContainerBuilder $container)
