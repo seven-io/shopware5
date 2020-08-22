@@ -5,6 +5,10 @@
 A Shopware 5 plugin to programmatically make use of the Sms77.io SMS gateway. 
 
 Currently supported events:
+- DOCUMENT_CREATED_INVOICE (via onCreateDocument)
+- DOCUMENT_CREATED_DELIVERY_NOTICE (via onCreateDocument)
+- DOCUMENT_CREATED_CREDIT (via onCreateDocument)
+- DOCUMENT_CREATED_CANCELLATION (via onCreateDocument)
 - ORDER_STATE_CANCELLED
 - ORDER_STATE_READY_FOR_DELIVERY
 - ORDER_STATE_COMPLETELY_DELIVERED

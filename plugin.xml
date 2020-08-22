@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
-    <label lang="de">sms77io</label>
-    <label lang="en">sms77io</label>
-    <version>1.2.1</version>
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/plugin.xsd">
+    <label lang="de">Sms77.io SMS Gateway</label>
+    <label>Sms77.io SMS Gateway</label>
+    <version>1.2.2</version>
     <copyright>© by sms77 e.K.</copyright>
     <license>MIT</license>
     <link>https://www.sms77.io</link>
     <author>sms77 e.K.</author>
 
     <compatibility minVersion="5.3.0"/>
+
+    <changelog version="1.2.2">
+        <changes lang="de">
+            <![CDATA[
+                <ul>
+                    <li>Ereignis "DOCUMENT_CREATED_INVOICE" hinzugefügt</li>
+                    <li>Ereignis "DOCUMENT_CREATED_DELIVERY_NOTICE" hinzugefügt</li>
+                    <li>Ereignis "DOCUMENT_CREATED_CREDIT" hinzugefügt</li>
+                    <li>Ereignis "DOCUMENT_CREATED_CANCELLATION" hinzugefügt</li>
+                </ul>
+            ]]>
+        </changes>
+        <changes>
+            <![CDATA[
+                <ul>
+                    <li>Event "DOCUMENT_CREATED_INVOICE" added</li>
+                    <li>Event "DOCUMENT_CREATED_DELIVERY_NOTICE" added</li>
+                    <li>Event "DOCUMENT_CREATED_CREDIT" added</li>
+                    <li>Event "DOCUMENT_CREATED_CANCELLATION" added</li>
+                </ul>
+            ]]>
+        </changes>
+    </changelog>
 
     <changelog version="1.2.1">
         <changes lang="de">
@@ -19,7 +42,7 @@
                 </ul>
             ]]>
         </changes>
-        <changes lang="en">
+        <changes>
             <![CDATA[
                 <ul>
                     <li>Include "vendor" folder for manual installation</li>
@@ -36,7 +59,7 @@
                 </ul>
             ]]>
         </changes>
-        <changes lang="en">
+        <changes>
             <![CDATA[
                 <ul>
                     <li>Removed deprecated sms option "type"</li>
@@ -54,7 +77,7 @@
                 </ul>
             ]]>
         </changes>
-        <changes lang="en">
+        <changes>
             <![CDATA[
                 <ul>
                      <li>Added Bulk SMS Functionality</li>
@@ -66,7 +89,7 @@
 
     <changelog version="1.0.0">
         <changes lang="de">Erste Veröffentlichung</changes>
-        <changes lang="en">Initial Release</changes>
+        <changes>Initial Release</changes>
     </changelog>
 
     <description lang="de">

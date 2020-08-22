@@ -1,8 +1,5 @@
 <?php declare(strict_types=1);
 
-use Doctrine\DBAL\Driver\PDOStatement;
-use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\Query\Expr\Join;
 use Shopware\Components\CSRFWhitelistAware;
 use Sms77\Api\Client;
 

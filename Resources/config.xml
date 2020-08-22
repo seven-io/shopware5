@@ -1,73 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="../../../../engine/Shopware/Components/Plugin/schema/config.xsd">
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
     <elements>
-        <element type="boolean" required="true">
+        <element type="boolean">
             <name>sms77enabled</name>
             <label lang="de">Aktiviert</label>
-            <label lang="en">Enabled</label>
+            <label>Enabled</label>
             <value>0</value>
             <description lang="de">Soll das Plugin aktiviert sein?</description>
-            <description lang="en">Should the plugin be activated?</description>
+            <description>Should the plugin be activated?</description>
         </element>
 
-        <element type="text" required="true">
+        <element>
             <name>sms77apiKey</name>
             <label lang="de">API-Schlüssel</label>
-            <label lang="en">API key</label>
+            <label>API key</label>
             <description lang="de">Ein API-Schlüssel wird benötigt um SMS senden zu können. Erfahren Sie mehr auf
                 sms77.io.
             </description>
-            <description lang="en">An API key is needed in order to send SMS. Get yours now at sms77.io.</description>
+            <description>An API key is needed in order to send SMS. Get yours now at sms77.io.</description>
         </element>
 
-        <element type="select" required="true">
+        <element type="select">
             <name>sms77events</name>
             <label lang="de">Ereignisse</label>
-            <label lang="en">Events</label>
+            <label>Events</label>
             <description lang="de">Definiert die Ereignisse zum Versenden von SMS.</description>
-            <description lang="en">Defines the events when to send SMS.</description>
+            <description>Defines the events when to send SMS.</description>
             <store>
+                <option>
+                    <value>DOCUMENT_CREATED_INVOICE</value>
+                    <label lang="de">Rechnungs-Dokument erstellt</label>
+                    <label>Invoice document created</label>
+                </option>
+
+                <option>
+                    <value>DOCUMENT_CREATED_DELIVERY_NOTICE</value>
+                    <label lang="de">Auslieferbeleg-Dokument erstellt</label>
+                    <label>Delivery notice document created</label>
+                </option>
+
+                <option>
+                    <value>DOCUMENT_CREATED_CREDIT</value>
+                    <label lang="de">Gutschrift-Dokument erstellt</label>
+                    <label>Credit document created</label>
+                </option>
+
+                <option>
+                    <value>DOCUMENT_CREATED_CANCELLATION</value>
+                    <label lang="de">Storno-Dokument erstellt</label>
+                    <label>Cancellation document created</label>
+                </option>
+
                 <option>
                     <value>ORDER_STATE_CANCELLED</value>
                     <label lang="de">Bestellung storniert</label>
-                    <label lang="en">Order cancelled</label>
+                    <label>Order cancelled</label>
                 </option>
 
                 <option>
                     <value>ORDER_STATE_READY_FOR_DELIVERY</value>
                     <label lang="de">Bestellung versandfähig</label>
-                    <label lang="en">Order ready for delivery</label>
+                    <label>Order ready for delivery</label>
                 </option>
 
                 <option>
                     <value>ORDER_STATE_COMPLETELY_DELIVERED</value>
                     <label lang="de">Bestellung ausgeliefert</label>
-                    <label lang="en">Order delivered</label>
+                    <label>Order delivered</label>
                 </option>
 
                 <option>
                     <value>ORDER_STATE_CLARIFICATION_REQUIRED</value>
                     <label lang="de">Klärung erforderlich</label>
-                    <label lang="en">Order cancelled</label>
+                    <label>Order cancelled</label>
                 </option>
 
                 <option>
                     <value>PAYMENT_STATE_1ST_REMINDER</value>
                     <label lang="de">Die erste Zahlungserinnerung</label>
-                    <label lang="en">1st payment reminder</label>
+                    <label>1st payment reminder</label>
                 </option>
 
                 <option>
                     <value>PAYMENT_STATE_2ND_REMINDER</value>
                     <label lang="de">Die zweite Zahlungserinnerung</label>
-                    <label lang="en">2nd payment reminder</label>
+                    <label>2nd payment reminder</label>
                 </option>
 
                 <option>
                     <value>PAYMENT_STATE_3RD_REMINDER</value>
                     <label lang="de">Die dritte Zahlungserinnerung</label>
-                    <label lang="en">3rd payment reminder</label>
+                    <label>3rd payment reminder</label>
                 </option>
             </store>
 
@@ -76,117 +100,157 @@
             </options>
         </element>
 
-        <element type="textarea" scope="locale" required="true">
+        <element type="textarea">
+            <name>sms77textOnDocumentCreatedInvoice</name>
+            <label lang="de">Nachricht b. Erstellung v. Rechnungerstellungs-Dokument</label>
+            <label>Invoice created message</label>
+            <value>Dear customer. A new invoice has been generated. Log in to your account in order to see it. Best regards!
+            </value>
+            <description lang="de">Definiert den SMS-Inhalt bei Rechnungserstellung.</description>
+            <description>Defines the SMS content for invoice generation.</description>
+        </element>
+
+        <element type="textarea">
+            <name>sms77textOnDocumentCreatedDeliveryNotice</name>
+            <label lang="de">Nachricht b. Erstellung v. Auslieferbeleg-Dokument</label>
+            <label>Delivery notice created message</label>
+            <value>Dear customer. A delivery notice document has been generated. Log in to your account in order to see it. Best regards!
+            </value>
+            <description lang="de">Definiert den SMS-Inhalt bei Erstellung von Auslieferbeleg-Dokumenten.</description>
+            <description>Defines the SMS content for delivery notice documents.</description>
+        </element>
+
+        <element type="textarea">
+            <name>sms77textOnDocumentCreatedCredit</name>
+            <label lang="de">Nachricht b. Erstellung v. Gutschrift-Dokument</label>
+            <label>Credit document created message</label>
+            <value>Dear customer. A credit document has been generated. Log in to your account in order to see it. Best regards!
+            </value>
+            <description lang="de">Definiert den SMS-Inhalt bei Erstellung von Gutschrift-Dokumenten.</description>
+            <description>Defines the SMS content for credit documents.</description>
+        </element>
+
+        <element type="textarea">
+            <name>sms77textOnDocumentCreatedCancellation</name>
+            <label lang="de">Nachricht b. Erstellung v. Storno-Dokument</label>
+            <label>Cancellation document created message</label>
+            <value>Dear customer. A cancellation document has been generated. Log in to your account in order to see it. Best regards!
+            </value>
+            <description lang="de">Definiert den SMS-Inhalt bei Erstellung von Storno-Dokumenten.</description>
+            <description>Defines the SMS content for cancellation documents.</description>
+        </element>
+
+        <element type="textarea">
             <name>sms77textOnOrderStateCancelled</name>
             <label lang="de">Stornonachricht</label>
-            <label lang="en">Cancellation message</label>
+            <label>Cancellation message</label>
             <value>Dear customer. We are sorry about the cancelled order. We hope to serve you again soon. Best
                 regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt bei Stornierungen.</description>
-            <description lang="en">Defines the text content for cancellations.</description>
+            <description>Defines the text content for cancellations.</description>
         </element>
 
-        <element type="textarea" scope="locale" required="true">
+        <element type="textarea">
             <name>sms77textOnOrderStateReadyForDelivery</name>
             <label lang="de">Versandnachricht</label>
-            <label lang="en">Shipping message</label>
+            <label>Shipping message</label>
             <value>Dear customer. Your order is ready to be shipped. Log in to your customer account for more
                 information. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt bei Versandbestätigung.</description>
-            <description lang="en">Defines the text content for shipping confirmation.</description>
+            <description>Defines the text content for shipping confirmation.</description>
         </element>
 
-        <element type="textarea" scope="locale" required="true">
+        <element type="textarea">
             <name>sms77textOnOrderStateCompletelyDelivered</name>
             <label lang="de">Ausliefernachricht</label>
-            <label lang="en">Delivery message</label>
+            <label>Delivery message</label>
             <value>Dear customer. Your order has just been delivered by our logistics partner. Thank you for shopping.
                 Enjoy your goods and best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt bei erfolgter Auslieferung.</description>
-            <description lang="en">Defines the text content for delivery confirmation.</description>
+            <description>Defines the text content for delivery confirmation.</description>
         </element>
 
-        <element type="textarea" scope="locale" required="true">
+        <element type="textarea">
             <name>sms77textOnOrderStateClarificationRequired</name>
             <label lang="de">Klärungsnachricht</label>
-            <label lang="en">Clarification message</label>
+            <label>Clarification message</label>
             <value>Dear customer. Your order needs some clarification. Please contact us as soon as possible in order to
                 get your order fulfilled. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt bei Klärungsbedarf.</description>
-            <description lang="en">Defines the text content for clarification requests.</description>
+            <description>Defines the text content for clarification requests.</description>
         </element>
 
-        <element type="textarea" scope="locale" required="true">
+        <element type="textarea">
             <name>sms77textOnPaymentState1stReminder</name>
             <label lang="de">Erinnerungsnachricht #1</label>
-            <label lang="en">1st reminder message</label>
+            <label>1st reminder message</label>
             <value>Dear customer. This is just a little reminder that your order still needs to be paid before it gets
                 shipped. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt für die erste Erinnerungsnachricht.</description>
-            <description lang="en">Defines the text content for the first reminder.</description>
+            <description>Defines the text content for the first reminder.</description>
         </element>
 
-        <element type="textarea" scope="locale" required="true">
+        <element type="textarea">
             <name>sms77textOnPaymentState2ndReminder</name>
             <label lang="de">Erinnerungsnachricht #2</label>
-            <label lang="en">2nd reminder message</label>
+            <label>2nd reminder message</label>
             <value>Dear customer. We hereby inform you again that your order is still unpaid as of now. Please hurry in
                 order to get it shipped quickly. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt für die zweite Erinnerungsnachricht.</description>
-            <description lang="en">Defines the text content for the second reminder.</description>
+            <description>Defines the text content for the second reminder.</description>
         </element>
 
-        <element type="textarea" scope="locale" required="true">
+        <element type="textarea">
             <name>sms77textOnPaymentState3rdReminder</name>
             <label lang="de">Erinnerungsnachricht #3</label>
-            <label lang="en">3rd reminder message</label>
+            <label>3rd reminder message</label>
             <value>Dear customer. This is the last chance for you to pay for your order before we can finally ship it to
                 you. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt für die dritte Erinnerungsnachricht.</description>
-            <description lang="en">Defines the text content for the third reminder.</description>
+            <description>Defines the text content for the third reminder.</description>
         </element>
 
-        <element type="text">
+        <element>
             <name>sms77from</name>
             <label lang="de">Absenderkennung</label>
-            <label lang="en">Sender</label>
+            <label>Sender</label>
             <description lang="de">Definiert die Absenderkennung der übermittelten Nachrichten.</description>
-            <description lang="en">Defines the sender name for transmitted messages.</description>
+            <description>Defines the sender name for transmitted messages.</description>
         </element>
 
-        <element type="textarea" scope="locale">
+        <element type="textarea">
             <name>sms77signature</name>
             <label lang="de">Signatur</label>
-            <label lang="en">Signature</label>
+            <label>Signature</label>
             <value/>
             <description lang="de">Text, welcher jeder ausgehenden Nachricht hinzugefügt wird.</description>
-            <description lang="en">Text to add to every outgoing message.</description>
+            <description>Text to add to every outgoing message.</description>
         </element>
 
         <element type="select">
             <name>sms77signaturePosition</name>
             <label lang="de">Signatur-Position</label>
-            <label lang="en">Signature Position</label>
+            <label>Signature Position</label>
             <description lang="de">Bestimmt, wo die Signatur in der Nachricht eingefügt wird.</description>
-            <description lang="en">Defines where in the message to add the signature.</description>
+            <description>Defines where in the message to add the signature.</description>
             <store>
                 <option>
                     <value>append</value>
                     <label lang="de">Vor Nachricht</label>
-                    <label lang="en">Append</label>
+                    <label>Append</label>
                 </option>
 
                 <option>
                     <value>prepend</value>
                     <label lang="de">Hinter Nachricht</label>
-                    <label lang="en">Prepend</label>
+                    <label>Prepend</label>
                 </option>
             </store>
         </element>
