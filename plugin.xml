@@ -3,13 +3,30 @@
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/plugin.xsd">
     <label lang="de">Sms77.io SMS Gateway</label>
     <label>Sms77.io SMS Gateway</label>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <copyright>© by sms77 e.K.</copyright>
     <license>MIT</license>
     <link>https://www.sms77.io</link>
     <author>sms77 e.K.</author>
 
     <compatibility minVersion="5.3.0"/>
+
+    <changelog version="1.2.3">
+        <changes lang="de">
+            <![CDATA[
+                <ul>
+                    <li>Ereignisbasiertes Logging für erstellte Dokumente hinzugefügt</li>
+                </ul>
+            ]]>
+        </changes>
+        <changes>
+            <![CDATA[
+                <ul>
+                    <li>Added event based dispatch logging for created documents</li>
+                </ul>
+            ]]>
+        </changes>
+    </changelog>
 
     <changelog version="1.2.2">
         <changes lang="de">

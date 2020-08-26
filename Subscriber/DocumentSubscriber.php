@@ -7,6 +7,7 @@ use Enlight\Event\SubscriberInterface;
 use Shopware\Components\Logger;
 use Shopware\Components\Model\ModelManager;
 use Shopware\Models\Order\Repository as OrderRepository;
+use Sms77ShopwareApi\DocumentCreatedEvents;
 use Sms77ShopwareApi\Util;
 use Shopware\Models\Order\Order;
 
@@ -46,27 +47,35 @@ class DocumentSubscriber implements SubscriberInterface {
     public function onCreateDocument(Enlight_Hook_HookArgs $arguments): void {
         $config = Util::getConfig();
 
+        $this->logger->info('Preparing to dispatch SMS', $config);
+
         if (!Util::shouldSend($config)) {
+            $this->logger->warning('Should not dispatch SMS', $config);
+
             return;
         }
 
         $request = $arguments->getSubject()->Request();
         $documentType = $request->getParam('documentType');
         $order = $this->orderRepo->find($request->getParam('orderId'));
-        $pairs = Util::getClassConstantPairs($config, new class {
-            public const DOCUMENT_CREATED_INVOICE = 1;
-            public const DOCUMENT_CREATED_DELIVERY_NOTICE = 2;
-            public const DOCUMENT_CREATED_CREDIT = 3;
-            public const DOCUMENT_CREATED_CANCELLATION = 4;
-        });
+        $pairs = Util::getClassConstantPairs($config, new DocumentCreatedEvents);
         $isValidEvent = in_array($documentType, $pairs, true);
 
-        if ($isValidEvent) {
-            Util::sms(
-                $config,
-                $order,
-                $documentType,
-                self::MAPPINGS);
+        if (!$isValidEvent) {
+            $this->logger->warning('Invalid event for dispatch SMS', $config);
+
+            return;
         }
+
+        $response = Util::sms(
+            $config,
+            $order,
+            $documentType,
+            self::MAPPINGS);
+
+        $this->logger->info('After dispatch SMS', [
+            'config' => $config,
+            'response' => $response,
+        ]);
     }
 }
