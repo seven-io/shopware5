@@ -25,7 +25,7 @@ Currently supported events:
 2. Upload the *.zip file via the plugin manager and activate it
 3. Enable the plugin from the configuration page
 4. Set an API key and enable wanted events
-![sms77io Shopware5 Plugin Configuration](https://www.sms77.io/wp-content/uploads/localhost_shopware_backend_-2.png)
+![sms77io Shopware5 Plugin Configuration](https://tettra-production.s3.us-west-2.amazonaws.com/0d6efb4f154041e899af17bdcd19c1b5/bcac36a50716f4f73cd84020c4bf091d/d822b155a4112474fdb7aea5ee22465e/cb30d8dd64d0e83fcc7822a40f1703d9/ihvjL4rtsGi34tVqwX4ao7FvZVscBV8gHz1wT36h.png)
 </figure>
 
 <figure>
