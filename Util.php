@@ -19,27 +19,6 @@ class Util {
             ->getByPluginName('Sms77ShopwareApi');
     }
 
-    public static function getSmsText(int $statusId, array $config, array $mappings): ?string {
-        $text = null;
-
-        if (array_key_exists($statusId, $mappings)) {
-            $cfgKey = 'sms77textOn' . $mappings[$statusId];
-
-            if (array_key_exists($cfgKey, $config)) {
-                $text = $config[$cfgKey];
-            }
-        }
-
-        if (array_key_exists('sms77signature', $config)
-            && '' !== $config['sms77signature']) {
-            $text = 'prepend' === $config['sms77signaturePosition']
-                ? $text + $config['sms77signature']
-                : $config['sms77signature'] + $text;
-        }
-
-        return $text;
-    }
-
     public static function getClassConstantPairs(array $config, $classOrObject): array {
         $ids = [];
 
@@ -57,11 +36,16 @@ class Util {
         return $ids;
     }
 
-    public static function sms(array $config, Order $order, int $id, array $mappings): string {
+    public static function sms(array $config, Order $order, int $ev, array $mappings): string {
+
         return (self::getClient($config))->sms(
             self::getPhoneFromOrder($order),
-            self::getSmsText($id, $config, $mappings),
+            self::getSmsText($ev, $config, $mappings, $order),
             self::getExtras($config));
+    }
+
+    public static function getClient(array $config): Client {
+        return new Client($config['sms77apiKey'], 'shopware');
     }
 
     public static function getPhoneFromOrder(Order $order): string {
@@ -70,8 +54,63 @@ class Util {
             : $order->getShipping()->getPhone();
     }
 
-    public static function getClient(array $config): Client {
-        return new Client($config['sms77apiKey'], 'shopware');
+    public static function getSmsText(int $status, array $cfg, array $mappings, Order $order): ?string {
+        $text = null;
+
+        if (array_key_exists($status, $mappings)) {
+            $cfgKey = 'sms77textOn' . $mappings[$status];
+
+            if (array_key_exists($cfgKey, $cfg)) {
+                $text = $cfg[$cfgKey];
+            }
+        }
+
+        if (array_key_exists('sms77signature', $cfg)
+            && '' !== $cfg['sms77signature']) {
+            $text = 'prepend' === $cfg['sms77signaturePosition']
+                ? $text . $cfg['sms77signature']
+                : $cfg['sms77signature'] . $text;
+        }
+
+        foreach (explode(' ', $text) as $word) {
+            $word = str_replace(['.', ',', '?', '!', '¿'], '', $word); // remove endings
+
+            if (!StringUtil::startsWith($word, '{{') || !StringUtil::endsWith($word, '}}')) {
+                continue;
+            }
+
+            $placeholder = str_replace(['{', '}'], '', $word);
+            $replace = static function ($replace) use ($placeholder, &$text) {
+                $text = str_replace('{{' . $placeholder . '}}', $replace, $text);
+            };
+
+            if (false !== mb_strpos($placeholder, '->')) {
+                $obj = $order;
+                $parts = explode('->', $placeholder);
+
+                foreach ($parts as $k => $part) {
+                    $method = StringUtil::toGetter($part);
+
+                    if (!method_exists($obj, $method)) {
+                        break;
+                    }
+
+                    $obj = $obj->$method();
+
+                    if ($k === count($parts) - 1) {
+                        $replace($obj);
+                    }
+                }
+            } else {
+                $method = StringUtil::toGetter($placeholder);
+
+                if (method_exists($order, $method)) {
+                    $replace($order->$method());
+                }
+            }
+        }
+
+        return $text;
     }
 
     public static function getExtras(array $config): array {

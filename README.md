@@ -1,4 +1,4 @@
-![Sms77.io Logo](https://www.sms77.io/wp-content/uploads/2019/07/sms77-Logo-400x79.png "sms77")
+![](https://www.sms77.io/wp-content/uploads/2019/07/sms77-Logo-400x79.png "Sms77.io Logo")
 # Sms77.io Shopware5 Plugin
 
 ## About
@@ -17,7 +17,15 @@ Currently supported events:
 - PAYMENT_STATE_2ND_REMINDER
 - PAYMENT_STATE_3RD_REMINDER
 
-## Installation
+Template Placeholders:
+
+Template placeholders are available for programmatically sent messages like this:
+Dear {{customer->firstname}} {{customer->lastname}}. A new invoice for order #{{id}} has been generated.
+{{customer->firstname}} resolves to $order->getCustomer()->getFirstname() and so on.
+The root is the $order, so using {{invoiceAmount}} resolves to $order->getInvoiceAmount().
+Be careful as the variables are case-sensitive!
+
+### Installation
 <figure>
 <figcaption>Vie file upload</figcaption>
 
@@ -39,8 +47,8 @@ Currently supported events:
 6. Set an API key and enable wanted events
 </figure>
 
-### License
+#### License
 Please see [License File](LICENSE) for more information.
 
-#### Need help?
+##### Need help?
 You are more than welcome to contact us via [Sms77.io](https://www.sms77.io) in order to get assistance.
