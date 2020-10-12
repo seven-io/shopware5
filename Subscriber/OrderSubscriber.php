@@ -9,8 +9,7 @@ use Shopware\Models\Order\Order;
 use Shopware\Models\Order\Status;
 use Sms77ShopwareApi\Util;
 
-class OrderSubscriber implements EventSubscriber
-{
+class OrderSubscriber implements EventSubscriber {
     private const MAPPINGS = [
         -1 => 'OrderStateCancelled',
         5 => 'OrderStateReadyForDelivery',
@@ -23,49 +22,42 @@ class OrderSubscriber implements EventSubscriber
     private const FIELD_PAYMENT_STATUS = 'paymentStatus';
     private const FIELD_ORDER_STATUS = 'orderStatus';
 
-    /**
-     * Returns an array of events this subscriber wants to listen to.
-     *
-     * @return array
-     */
-    public function getSubscribedEvents()
-    {
+    public function getSubscribedEvents(): array {
         return [Events::preUpdate];
     }
 
-    public function preUpdate(PreUpdateEventArgs $eventArgs): void
-    {
+    public function preUpdate(PreUpdateEventArgs $evArgs): void {
         /** @var Status|null $newStatus */
         $newStatus = null;
 
-        $isPaymentStatusChanged = $eventArgs->hasChangedField(self::FIELD_PAYMENT_STATUS);
+        $isPaymentStatusChanged = $evArgs->hasChangedField(self::FIELD_PAYMENT_STATUS);
 
         if (!$isPaymentStatusChanged
-            && !$eventArgs->hasChangedField(self::FIELD_ORDER_STATUS)) {
+            && !$evArgs->hasChangedField(self::FIELD_ORDER_STATUS)) {
             return;
         }
 
         /** @var Order $order */
-        $order = $eventArgs->getEntity();
+        $order = $evArgs->getEntity();
         if (!$order instanceof Order) {
             return;
         }
 
-        $pluginConfig = Util::getConfig();
-        if (!Util::shouldSend($pluginConfig)) {
+        $cfg = Util::getConfig();
+        if (!Util::shouldSend($cfg)) {
             return;
         }
 
         $key = $isPaymentStatusChanged
             ? self::FIELD_PAYMENT_STATUS : self::FIELD_ORDER_STATUS;
-        $newStatus = $eventArgs->getNewValue($key);
+        $newStatus = $evArgs->getNewValue($key);
 
         $statusId = $newStatus->getId();
-        $pairs = Util::getClassConstantPairs($pluginConfig, Status::class);
-        $isValidEvent = in_array($statusId, $pairs, true);
+        $isValidEvent = in_array(
+            $statusId, Util::getClassConstantPairs($cfg, Status::class), true);
 
         if (null !== $newStatus && $isValidEvent) {
-            Util::sms($pluginConfig, $order, $statusId, self::MAPPINGS);
+            Util::sms($cfg, $order, $statusId, self::MAPPINGS);
         }
     }
 }

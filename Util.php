@@ -4,14 +4,11 @@ namespace Sms77ShopwareApi;
 
 use Exception;
 use ReflectionClassConstant;
+use Shopware\Components\Logger;
 use Shopware\Models\Order\Order;
 use Sms77\Api\Client;
 
 class Util {
-    public static function shouldSend(array $config): bool {
-        return !(!$config['sms77enabled'] || !isset($config['sms77apiKey']));
-    }
-
     public static function getConfig(): array {
         return Shopware()
             ->Container()
@@ -37,21 +34,51 @@ class Util {
     }
 
     public static function sms(array $config, Order $order, int $ev, array $mappings): string {
+        /** @var Logger $logger */
+        $logger = Shopware()->Container()->get('pluginlogger');
 
-        return (self::getClient($config))->sms(
-            self::getPhoneFromOrder($order),
+        if (!self::shouldSend($config)) {
+            $logger->warning('Should not dispatch SMS', $config);
+
+            return "";
+        }
+
+        $to = self::getPhoneFromOrder($order);
+
+        if (!$to) {
+            return "301";
+        }
+
+        $response = (self::getClient($config))->sms(
+            $to,
             self::getSmsText($ev, $config, $mappings, $order),
             self::getExtras($config));
+
+        $logger->info('After dispatch SMS', [
+            'config' => $config,
+            'response' => $response,
+        ]);
+
+        return $response;
+    }
+
+    public static function shouldSend(array $config): bool {
+        return !(!$config['sms77enabled'] || !isset($config['sms77apiKey']));
+    }
+
+    public static function getPhoneFromOrder(Order $order): ?string {
+        $shipping = $order->getShipping();
+        $billing = $order->getBilling();
+
+        if (null === $shipping) {
+            return null === $billing ? null : $billing->getPhone();
+        }
+
+        return $shipping->getPhone();
     }
 
     public static function getClient(array $config): Client {
         return new Client($config['sms77apiKey'], 'shopware');
-    }
-
-    public static function getPhoneFromOrder(Order $order): string {
-        return '' === $order->getShipping()->getPhone()
-            ? $order->getBilling()->getPhone()
-            : $order->getShipping()->getPhone();
     }
 
     public static function getSmsText(int $status, array $cfg, array $mappings, Order $order): ?string {

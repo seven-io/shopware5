@@ -3,9 +3,13 @@ declare(strict_types=1);
 
 namespace Sms77ShopwareApi;
 
+use Enlight_Event_EventArgs;
 use ReflectionClass;
 use Shopware\Components\Plugin;
+use Shopware\Components\Plugin\Context\ActivateContext;
+use Shopware\Components\Plugin\Context\DeactivateContext;
 use Shopware\Components\Plugin\Context\InstallContext;
+use Shopware\Models\Order\Order;
 use Shopware\Models\Shop\Shop;
 use Sms77\Api\Exception\InvalidOptionalArgumentException;
 use Sms77\Api\Validator\SmsValidator;
@@ -16,20 +20,29 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 }
 
 class Sms77ShopwareApi extends Plugin {
-    public function build(ContainerBuilder $container) {
+    public static function getSubscribedEvents(): array {
+        return [
+            'Enlight_Controller_Dispatcher_ControllerPath_Backend_Sms77Api'
+            => 'onGetBackendController',
+            'Shopware_Modules_Order_SendMail_FilterVariables' => 'onSaveOrder',
+        ];
+    }
+
+    public function activate(ActivateContext $context): void {
+        $context->scheduleClearCache(ActivateContext::CACHE_LIST_DEFAULT);
+    }
+
+    public function deactivate(DeactivateContext $context): void {
+        $context->scheduleClearCache(DeactivateContext::CACHE_LIST_DEFAULT);
+    }
+
+    public function build(ContainerBuilder $container): void {
         $container->setParameter('sms77_shopware_api.plugin_dir', $this->getPath());
 
         parent::build($container);
     }
 
-    public static function getSubscribedEvents() {
-        return [
-            'Enlight_Controller_Dispatcher_ControllerPath_Backend_Sms77Api'
-            => 'onGetBackendController',
-        ];
-    }
-
-    public function install(InstallContext $installContext) {
+    public function install(InstallContext $installContext): void {
         $pluginManager =
             Shopware()->Container()->get('shopware_plugininstaller.plugin_manager');
         $pluginName =
@@ -53,7 +66,19 @@ class Sms77ShopwareApi extends Plugin {
         parent::install($installContext);
     }
 
-    public function onGetBackendController() {
+    public function onGetBackendController(): string {
         return __DIR__ . '/Controllers/Backend/Sms77Api.php';
+    }
+
+    public function onSaveOrder(Enlight_Event_EventArgs $args): void {
+        $eventOptionsKey = 12;
+
+        Util::sms(
+            Util::getConfig(),
+            Shopware()->Models()->getRepository(Order::class)->findOneBy(
+                ['number' => $args->getReturn()['ordernumber']]),
+            $eventOptionsKey,
+            [$eventOptionsKey => 'SaveOrder',]
+        );
     }
 }

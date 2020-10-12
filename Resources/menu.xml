@@ -5,7 +5,7 @@
     <entries>
         <entry>
             <name>Sms77ApiPlugin</name>
-            <label lang="en">Sms77ApiPlugin</label>
+            <label>Sms77ApiPlugin</label>
             <label lang="de">Sms77ApiPlugin</label>
             <controller>Sms77Api</controller>
             <action>index</action>

@@ -2,28 +2,27 @@
 
 namespace Sms77ShopwareApi\Subscriber;
 
-use Enlight_Hook_HookArgs;
 use Enlight\Event\SubscriberInterface;
+use Enlight_Hook_HookArgs;
 use Shopware\Components\Logger;
 use Shopware\Components\Model\ModelManager;
-use Shopware\Models\Order\Repository as OrderRepository;
-use Sms77ShopwareApi\DocumentCreatedEvents;
-use Sms77ShopwareApi\Util;
 use Shopware\Models\Order\Order;
+use Shopware\Models\Order\Repository as OrderRepository;
+use Sms77ShopwareApi\Util;
 
 class DocumentSubscriber implements SubscriberInterface {
-    /** @var Logger $logger */
-    private $logger;
-
-    /** @var OrderRepository $orderRepo */
-    private $orderRepo;
-
     private const MAPPINGS = [
         1 => 'DocumentCreatedInvoice',
         2 => 'DocumentCreatedDeliveryNotice',
         3 => 'DocumentCreatedCredit',
         4 => 'DocumentCreatedCancellation',
     ];
+
+    /** @var Logger $logger */
+    private $logger;
+
+    /** @var OrderRepository $orderRepo */
+    private $orderRepo;
 
     public function __construct(
         Logger $logger,
@@ -33,49 +32,45 @@ class DocumentSubscriber implements SubscriberInterface {
         $this->orderRepo = $modelManager->getRepository(Order::class);
     }
 
-    /**
-     * Returns an array of events this subscriber wants to listen to.
-     * @return array
-     */
-    public static function getSubscribedEvents() {
+    public static function getSubscribedEvents(): array {
         return [
             'Shopware_Controllers_Backend_Order::createDocumentAction::after'
             => 'onCreateDocument',
         ];
     }
 
-    public function onCreateDocument(Enlight_Hook_HookArgs $arguments): void {
-        $config = Util::getConfig();
+    public function onCreateDocument(Enlight_Hook_HookArgs $args): void {
+        $cfg = Util::getConfig();
 
-        $this->logger->info('Preparing to dispatch SMS', $config);
+        $this->logger->info('Preparing to dispatch SMS', $cfg);
 
-        if (!Util::shouldSend($config)) {
-            $this->logger->warning('Should not dispatch SMS', $config);
+        $request = $args->getSubject()->Request();
+        $docType = (int)$request->getParam('documentType');
 
-            return;
-        }
-
-        $request = $arguments->getSubject()->Request();
-        $documentType = $request->getParam('documentType');
-        $order = $this->orderRepo->find($request->getParam('orderId'));
-        $pairs = Util::getClassConstantPairs($config, new DocumentCreatedEvents);
-        $isValidEvent = in_array($documentType, $pairs, true);
-
-        if (!$isValidEvent) {
-            $this->logger->warning('Invalid event for dispatch SMS', $config);
-
-            return;
-        }
-
-        $response = Util::sms(
-            $config,
-            $order,
-            $documentType,
+        $this->isValidEvent($cfg, $docType) && Util::sms(
+            $cfg,
+            $this->orderRepo->find($request->getParam('orderId')),
+            $docType,
             self::MAPPINGS);
+    }
 
-        $this->logger->info('After dispatch SMS', [
-            'config' => $config,
-            'response' => $response,
-        ]);
+    private function isValidEvent(array $cfg, int $documentType): bool {
+        $cls = new class {
+            public const DOCUMENT_CREATED_INVOICE = 1;
+            public const DOCUMENT_CREATED_DELIVERY_NOTICE = 2;
+            public const DOCUMENT_CREATED_CREDIT = 3;
+            public const DOCUMENT_CREATED_CANCELLATION = 4;
+        };
+
+        $values = Util::getClassConstantPairs($cfg, $cls);
+
+        if (in_array($documentType, $values)) {
+            return true;
+        }
+
+        $this->logger->warning(
+            "Invalid document subscription event '$documentType' for dispatch SMS", $cfg);
+
+        return false;
     }
 }

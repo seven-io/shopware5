@@ -3,22 +3,18 @@
 use Shopware\Components\CSRFWhitelistAware;
 use Sms77\Api\Client;
 
-class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action implements CSRFWhitelistAware
-{
-    public function preDispatch()
-    {
+class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action implements CSRFWhitelistAware {
+    public function preDispatch(): void {
         $this->get('template')->addTemplateDir(__DIR__ . '/../../Resources/views/');
     }
 
-    public function postDispatch()
-    {
+    public function postDispatch(): void {
         $this->View()->assign([
             'csrfToken' => $this->container->get('BackendSession')->offsetGet('X-CSRF-Token'),
         ]);
     }
 
-    public function indexAction()
-    {
+    public function indexAction(): void {
         $modelManager = $this->getModelManager();
 
         $pluginConfig = Shopware()
@@ -40,7 +36,7 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
             $failed = [];
             $sent = [];
 
-            $countries = array_map(function ($c) {
+            $countries = array_map(static function ($c) {
                 return (int)$c;
             }, $request->getParam('countries'));
 
@@ -50,7 +46,7 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
                 $from = mb_strlen($from) ? $from : 'sms77io';
             }
 
-            $getCustomers = function () use ($request, $countries, $modelManager) {
+            $getCustomers = static function () use ($request, $modelManager) {
                 $customerGroups = $request->getParam('customerGroups');
 
                 $customerRepo = $modelManager->getRepository('Shopware\Models\Customer\Customer');
@@ -70,20 +66,18 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
                 $defaultShippingAddress = $customer->getDefaultShippingAddress();
                 $defaultBillingAddress = $customer->getDefaultBillingAddress();
 
-                $defaultAddress = is_null($defaultShippingAddress) ? $defaultBillingAddress : $defaultShippingAddress;
+                $defaultAddress = is_null($defaultShippingAddress)
+                    ? $defaultBillingAddress : $defaultShippingAddress;
 
-                if (count($countries)) {
-                    if (!in_array($defaultAddress->getCountry()->getId(), $countries)) {
-                        continue;
-                    }
+                if (count($countries)
+                    && !in_array($defaultAddress->getCountry()->getId(), $countries)) {
+                    continue;
                 }
 
                 $defaultShippingPhone = $defaultShippingAddress->getPhone();
 
                 $phone =
-                    $defaultShippingPhone
-                        ? $defaultShippingPhone
-                        : $defaultBillingAddress->getPhone();
+                    $defaultShippingPhone ?: $defaultBillingAddress->getPhone();
 
                 if (!$phone) {
                     continue;
@@ -91,7 +85,7 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
 
                 $text = $request->getParam('text');
                 $signature = $pluginConfig['sms77signature'];
-                if (mb_strlen($signature)) {
+                if ('' !== $signature) {
                     $signaturePosition = $pluginConfig['sms77signaturePosition'];
 
                     $text = 'prepend' === $signaturePosition
@@ -100,7 +94,7 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
                 }
 
                 try {
-                    $extras = array_merge(compact( 'from'), ['json' => true]);
+                    $extras = array_merge(compact('from'), ['json' => true]);
 
                     $res = $client->sms($phone, $text, $extras);
                     $res = (array)json_decode($res);
@@ -123,13 +117,13 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
         }
 
         $this->View()->assign([
-            'customerGroups' => array_map(function ($cGroup) {
+            'customerGroups' => array_map(static function ($cGroup) {
                 return [
                     'label' => $cGroup->getName(),
                     'id' => $cGroup->getKey(),
                 ];
             }, $allCustomerGroups),
-            'countries' => array_map(function ($c) {
+            'countries' => array_map(static function ($c) {
                 return [
                     'label' => ucfirst(strtolower($c->getIsoName())),
                     'id' => $c->getId(),
@@ -139,8 +133,7 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
         ]);
     }
 
-    public function getWhitelistedCSRFActions()
-    {
+    public function getWhitelistedCSRFActions(): array {
         return ['index'];
     }
 }

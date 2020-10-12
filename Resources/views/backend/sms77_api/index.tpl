@@ -51,18 +51,22 @@
             {if {config name=sms77apiKey}|count_characters}
                 <form class="form-horizontal sms77-bulk-form" method="post">
                     <div class="form-group">
-                        <label for="text" class="col-sm-2 control-label">Message Content</label>
+                        <label for="text" class="col-sm-2 control-label">Message
+                            Content</label>
 
                         <div class="col-sm-10">
-                            <textarea id="text" class="form-control" name="text" required></textarea>
+                            <textarea id="text" class="form-control" name="text"
+                                      required></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="customerGroups" class="col-sm-2 control-label">Customer Groups</label>
+                        <label for="customerGroups" class="col-sm-2 control-label">Customer
+                            Groups</label>
 
                         <div class="col-sm-10">
-                            <select class="form-control" id="customerGroups" name="customerGroups[]" multiple>
+                            <select class="form-control" id="customerGroups"
+                                    name="customerGroups[]" multiple>
                                 {foreach from=$customerGroups item=group}
                                     <option value="{$group['id']}">{$group['label']}</option>
                                 {/foreach}
@@ -71,10 +75,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="countries" class="col-sm-2 control-label">Countries</label>
+                        <label for="countries"
+                               class="col-sm-2 control-label">Countries</label>
 
                         <div class="col-sm-10">
-                            <select id="countries" class="form-control" name="countries[]" multiple>
+                            <select id="countries" class="form-control" name="countries[]"
+                                    multiple>
                                 {foreach from=$countries item=country}
                                     <option value="{$country['id']}">{$country['label']}</option>
                                 {/foreach}
@@ -103,7 +109,8 @@
                                 aria-hidden="true">&times;</span></button>
 
                     <p>
-                        An API key is required in order to send SMS. Get yours now @ www.sms77.io.
+                        An API key is required in order to send SMS. Get yours now @
+                        www.sms77.io.
                     </p>
                 </div>
             {/if}

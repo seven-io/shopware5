@@ -9,7 +9,8 @@
 <body role="document" style="padding-top: 80px">
 
 <div class="container theme-showcase" role="main">
-    <img src="{link file="backend/_resources/img/sms77-Logo-400x79.png"}" alt="sms77io Logo"/>
+    <img src="{link file="backend/_resources/img/sms77-Logo-400x79.png"}"
+         alt="sms77io Logo"/>
 
     {block name="content/main"}{/block}
 </div>

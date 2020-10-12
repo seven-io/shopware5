@@ -93,6 +93,12 @@
                     <label lang="de">Die dritte Zahlungserinnerung</label>
                     <label>3rd payment reminder</label>
                 </option>
+
+                <option>
+                    <value>SAVE_ORDER</value>
+                    <label lang="de">Bestelleingang</label>
+                    <label>Save order</label>
+                </option>
             </store>
 
             <options>
@@ -144,8 +150,7 @@
             <name>sms77textOnOrderStateCancelled</name>
             <label lang="de">Stornonachricht</label>
             <label>Cancellation message</label>
-            <value>Dear customer. We are sorry about the cancelled order. We hope to serve you again soon. Best
-                regards!
+            <value>Dear customer. We are sorry about the cancelled order. We hope to serve you again soon. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt bei Stornierungen.</description>
             <description>Defines the text content for cancellations.</description>
@@ -155,8 +160,7 @@
             <name>sms77textOnOrderStateReadyForDelivery</name>
             <label lang="de">Versandnachricht</label>
             <label>Shipping message</label>
-            <value>Dear customer. Your order is ready to be shipped. Log in to your customer account for more
-                information. Best regards!
+            <value>Dear customer. Your order is ready to be shipped. Log in to your customer account for more information. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt bei Versandbestätigung.</description>
             <description>Defines the text content for shipping confirmation.</description>
@@ -166,8 +170,7 @@
             <name>sms77textOnOrderStateCompletelyDelivered</name>
             <label lang="de">Ausliefernachricht</label>
             <label>Delivery message</label>
-            <value>Dear customer. Your order has just been delivered by our logistics partner. Thank you for shopping.
-                Enjoy your goods and best regards!
+            <value>Dear customer. Your order has just been delivered by our logistics partner. Thank you for shopping. Enjoy your goods and best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt bei erfolgter Auslieferung.</description>
             <description>Defines the text content for delivery confirmation.</description>
@@ -177,8 +180,7 @@
             <name>sms77textOnOrderStateClarificationRequired</name>
             <label lang="de">Klärungsnachricht</label>
             <label>Clarification message</label>
-            <value>Dear customer. Your order needs some clarification. Please contact us as soon as possible in order to
-                get your order fulfilled. Best regards!
+            <value>Dear customer. Your order needs some clarification. Please contact us as soon as possible in order to get your order fulfilled. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt bei Klärungsbedarf.</description>
             <description>Defines the text content for clarification requests.</description>
@@ -188,8 +190,7 @@
             <name>sms77textOnPaymentState1stReminder</name>
             <label lang="de">Erinnerungsnachricht #1</label>
             <label>1st reminder message</label>
-            <value>Dear customer. This is just a little reminder that your order still needs to be paid before it gets
-                shipped. Best regards!
+            <value>Dear customer. This is just a little reminder that your order still needs to be paid before it gets shipped. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt für die erste Erinnerungsnachricht.</description>
             <description>Defines the text content for the first reminder.</description>
@@ -199,8 +200,7 @@
             <name>sms77textOnPaymentState2ndReminder</name>
             <label lang="de">Erinnerungsnachricht #2</label>
             <label>2nd reminder message</label>
-            <value>Dear customer. We hereby inform you again that your order is still unpaid as of now. Please hurry in
-                order to get it shipped quickly. Best regards!
+            <value>Dear customer. We hereby inform you again that your order is still unpaid as of now. Please hurry in order to get it shipped quickly. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt für die zweite Erinnerungsnachricht.</description>
             <description>Defines the text content for the second reminder.</description>
@@ -210,11 +210,19 @@
             <name>sms77textOnPaymentState3rdReminder</name>
             <label lang="de">Erinnerungsnachricht #3</label>
             <label>3rd reminder message</label>
-            <value>Dear customer. This is the last chance for you to pay for your order before we can finally ship it to
-                you. Best regards!
+            <value>Dear customer. This is the last chance for you to pay for your order before we can finally ship it to you. Best regards!
             </value>
             <description lang="de">Definiert den SMS-Inhalt für die dritte Erinnerungsnachricht.</description>
             <description>Defines the text content for the third reminder.</description>
+        </element>
+
+        <element type="textarea">
+            <name>sms77textOnSaveOrder</name>
+            <label lang="de">Bestellnachricht</label>
+            <label>Save order message</label>
+            <value>Dear customer. Thanks for placing your order with us. Best regards!</value>
+            <description lang="de">Definiert den SMS-Inhalt bei Bestelleingang.</description>
+            <description>Defines the text content for order confirmations.</description>
         </element>
 
         <element>
