@@ -1,12 +1,15 @@
+{namespace name="backend/sms77_api"}
+
 {extends file="parent:backend/_base/layout.tpl"}
 
 {block name="content/main"}
     <div class="page-header">
-        <h1>Send Bulk SMS</h1>
+        <h1>{s name="sms77_api/sms/bulk"}{/s}</h1>
     </div>
     {if $infos|@count}
         <div class="alert alert-info alert-dismissible" role="alert">
-            <button class="close" data-dismiss="alert" aria-label="Close"><span
+            <button class="close" data-dismiss="alert"
+                    aria-label="{s name="sms77_api/close"}{/s}"><span
                         aria-hidden="true">&times;</span></button>
 
             <ul>
@@ -19,7 +22,8 @@
 
     {if isset($sent) && $sent|@count}
         <div class="alert alert-success alert-dismissible" role="alert">
-            <button class="close" data-dismiss="alert" aria-label="Close"><span
+            <button class="close" data-dismiss="alert"
+                    aria-label="{s name="sms77_api/close"}{/s}"><span
                         aria-hidden="true">&times;</span></button>
 
             <ul>
@@ -32,7 +36,8 @@
 
     {if isset($failed) && $failed|@count}
         <div class="alert alert-danger alert-dismissible" role="alert">
-            <button class="close" data-dismiss="alert" aria-label="Close"><span
+            <button class="close" data-dismiss="alert"
+                    aria-label="{s name="sms77_api/close"}{/s}"><span
                         aria-hidden="true">&times;</span></button>
 
             <ul>
@@ -43,16 +48,19 @@
         </div>
     {/if}
     <div class="panel panel-default">
-        <div class="panel-heading"><h3 class="panel-title">Send Bulk SMS</h3></div>
+        <div class="panel-heading">
+            <h3 class="panel-title">{s name="sms77_api/sms/bulk"}{/s}</h3>
+        </div>
 
         <div class="panel-body">
-            <p>Sends a SMS to all of your customers at once.</p>
+            <p>{s name="sms77_api/sms/teaser"}{/s}</p>
 
             {if {config name=sms77apiKey}|count_characters}
                 <form class="form-horizontal sms77-bulk-form" method="post">
                     <div class="form-group">
-                        <label for="text" class="col-sm-2 control-label">Message
-                            Content</label>
+                        <label for="text" class="col-sm-2 control-label">
+                            {s name="sms77_api/msg_content"}{/s}
+                        </label>
 
                         <div class="col-sm-10">
                             <textarea id="text" class="form-control" name="text"
@@ -61,8 +69,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="customerGroups" class="col-sm-2 control-label">Customer
-                            Groups</label>
+                        <label for="customerGroups" class="col-sm-2 control-label">
+                            {s name="sms77_api/customer_groups"}{/s}
+                        </label>
 
                         <div class="col-sm-10">
                             <select class="form-control" id="customerGroups"
@@ -75,8 +84,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="countries"
-                               class="col-sm-2 control-label">Countries</label>
+                        <label for="countries" class="col-sm-2 control-label">
+                            {s name="sms77_api/countries"}{/s}
+                        </label>
 
                         <div class="col-sm-10">
                             <select id="countries" class="form-control" name="countries[]"
@@ -89,28 +99,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="from" class="col-sm-2 control-label">From</label>
+                        <label for="from" class="col-sm-2 control-label">
+                            {s name="sms77_api/from"}{/s}
+                        </label>
 
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="from" name="from"
-                                   value="{config name=sms77from}">
+                                   value="{config name=sms77from}" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Send</button>
+                            <button type="submit" class="btn btn-primary">
+                                {s name="sms77_api/send"}{/s}
+                            </button>
                         </div>
                     </div>
                 </form>
             {else}
                 <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button class="close" data-dismiss="alert" aria-label="Close"><span
+                    <button class="close" data-dismiss="alert"
+                            aria-label="{s name="sms77_api/close"}{/s}"><span
                                 aria-hidden="true">&times;</span></button>
 
                     <p>
-                        An API key is required in order to send SMS. Get yours now @
-                        www.sms77.io.
+                        {s name="sms77_api/api_key_required"}{/s}
                     </p>
                 </div>
             {/if}
