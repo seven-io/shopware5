@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Sms77ShopwareApi\Subscriber;
+namespace SevenShopwareApi\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Shopware\Models\Order\Order;
 use Shopware\Models\Order\Status;
-use Sms77ShopwareApi\Util;
+use SevenShopwareApi\Util;
 
 class OrderSubscriber implements EventSubscriber {
     private const MAPPINGS = [

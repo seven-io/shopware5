@@ -3,7 +3,7 @@
 use Shopware\Components\CSRFWhitelistAware;
 use Sms77\Api\Client;
 
-class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action implements CSRFWhitelistAware {
+class Shopware_Controllers_Backend_SevenApi extends Enlight_Controller_Action implements CSRFWhitelistAware {
     public function preDispatch(): void {
         $this->get('template')->addTemplateDir(__DIR__ . '/../../Resources/views/');
     }
@@ -20,9 +20,9 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
         $pluginConfig = Shopware()
             ->Container()
             ->get('shopware.plugin.cached_config_reader')
-            ->getByPluginName('Sms77ShopwareApi');
+            ->getByPluginName('SevenShopwareApi');
 
-        $apiKey = $pluginConfig['sms77apiKey'];
+        $apiKey = $pluginConfig['sevenapiKey'];
 
         $allCustomerGroups =
             $modelManager->getRepository('Shopware\Models\Customer\Group')->findAll();
@@ -42,8 +42,8 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
 
             $from = $request->getParam('from');
             if (!mb_strlen($from)) {
-                $from = $pluginConfig['sms77from'];
-                $from = mb_strlen($from) ? $from : 'sms77io';
+                $from = $pluginConfig['sevenfrom'];
+                $from = mb_strlen($from) ? $from : 'seven';
             }
 
             $getCustomers = static function () use ($request, $modelManager) {
@@ -84,9 +84,9 @@ class Shopware_Controllers_Backend_Sms77Api extends Enlight_Controller_Action im
                 }
 
                 $text = $request->getParam('text');
-                $signature = $pluginConfig['sms77signature'];
+                $signature = $pluginConfig['sevensignature'];
                 if ('' !== $signature) {
-                    $signaturePosition = $pluginConfig['sms77signaturePosition'];
+                    $signaturePosition = $pluginConfig['sevensignaturePosition'];
 
                     $text = 'prepend' === $signaturePosition
                         ? $signature . $text

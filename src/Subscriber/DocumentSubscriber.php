@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sms77ShopwareApi\Subscriber;
+namespace SevenShopwareApi\Subscriber;
 
 use Enlight\Event\SubscriberInterface;
 use Enlight_Hook_HookArgs;
@@ -8,7 +8,7 @@ use Shopware\Components\Logger;
 use Shopware\Components\Model\ModelManager;
 use Shopware\Models\Order\Order;
 use Shopware\Models\Order\Repository as OrderRepository;
-use Sms77ShopwareApi\Util;
+use SevenShopwareApi\Util;
 
 class DocumentSubscriber implements SubscriberInterface {
     private const MAPPINGS = [

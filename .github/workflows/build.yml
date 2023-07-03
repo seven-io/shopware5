@@ -17,7 +17,7 @@ jobs:
         run: |
           PLUGIN_NAME=$(cat composer.json | jq -r '.extra."installer-name"? | select(. != null)')
           PLUGIN_VERSION=$(grep -oP '(?<=version>)[^<]+' "plugin.xml")
-          ARCHIVE_NAME="sms77-shopware5-v${PLUGIN_VERSION}.zip"
+          ARCHIVE_NAME="seven-shopware5-v${PLUGIN_VERSION}.zip"
           echo "::set-output name=version::${PLUGIN_VERSION}"
           echo "::set-output name=archive_name::${ARCHIVE_NAME}"
           mkdir -p $PLUGIN_NAME

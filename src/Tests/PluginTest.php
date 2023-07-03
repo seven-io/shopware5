@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Sms77ShopwareApi\Tests;
+namespace SevenShopwareApi\Tests;
 
 use ReflectionClass;
 use Shopware\Components\Test\Plugin\TestCase;
-use Sms77ShopwareApi\Sms77ShopwareApi as Plugin;
+use SevenShopwareApi\SevenShopwareApi as Plugin;
 
 class PluginTest extends TestCase {
     protected static $ensureLoadedPlugins = [
-        'Sms77ShopwareApi' => [],
+        'SevenShopwareApi' => [],
     ];
 
     public function testCanCreateInstance() {

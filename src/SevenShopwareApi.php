@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Sms77ShopwareApi;
+namespace SevenShopwareApi;
 
 use Enlight_Event_EventArgs;
 use ReflectionClass;
@@ -19,10 +19,10 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
-class Sms77ShopwareApi extends Plugin {
+class SevenShopwareApi extends Plugin {
     public static function getSubscribedEvents(): array {
         return [
-            'Enlight_Controller_Dispatcher_ControllerPath_Backend_Sms77Api'
+            'Enlight_Controller_Dispatcher_ControllerPath_Backend_SevenApi'
             => 'onGetBackendController',
             'Shopware_Modules_Order_SendMail_FilterVariables' => 'onSaveOrder',
         ];
@@ -37,7 +37,7 @@ class Sms77ShopwareApi extends Plugin {
     }
 
     public function build(ContainerBuilder $container): void {
-        $container->setParameter('sms77_shopware_api.plugin_dir', $this->getPath());
+        $container->setParameter('seven_shopware_api.plugin_dir', $this->getPath());
 
         parent::build($container);
     }
@@ -59,15 +59,15 @@ class Sms77ShopwareApi extends Plugin {
         }
 
         $pluginManager->saveConfigElement($pluginName,
-            'sms77from', $validShopName ? $shopName : 'sms77io', $shop);
+            'sevenfrom', $validShopName ? $shopName : 'seven', $shop);
         $pluginManager->saveConfigElement($pluginName,
-            'sms77signaturePosition', 'append', $shop);
+            'sevensignaturePosition', 'append', $shop);
 
         parent::install($installContext);
     }
 
     public function onGetBackendController(): string {
-        return __DIR__ . '/Controllers/Backend/Sms77Api.php';
+        return __DIR__ . '/Controllers/Backend/SevenApi.php';
     }
 
     public function onSaveOrder(Enlight_Event_EventArgs $args): void {

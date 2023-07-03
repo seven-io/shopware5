@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sms77ShopwareApi;
+namespace SevenShopwareApi;
 
 use Exception;
 use ReflectionClassConstant;
@@ -13,13 +13,13 @@ class Util {
         return Shopware()
             ->Container()
             ->get('shopware.plugin.cached_config_reader')
-            ->getByPluginName('Sms77ShopwareApi');
+            ->getByPluginName('SevenShopwareApi');
     }
 
     public static function getClassConstantPairs(array $config, $classOrObject): array {
         $ids = [];
 
-        foreach ($config['sms77events'] as $name) {
+        foreach ($config['sevenevents'] as $name) {
             try {
                 $reflection = new ReflectionClassConstant($classOrObject, $name);
 
@@ -63,7 +63,7 @@ class Util {
     }
 
     public static function shouldSend(array $config): bool {
-        return !(!$config['sms77enabled'] || !isset($config['sms77apiKey']));
+        return !(!$config['sevenenabled'] || !isset($config['sevenapiKey']));
     }
 
     public static function getPhoneFromOrder(Order $order): ?string {
@@ -78,25 +78,25 @@ class Util {
     }
 
     public static function getClient(array $config): Client {
-        return new Client($config['sms77apiKey'], 'shopware');
+        return new Client($config['sevenapiKey'], 'shopware');
     }
 
     public static function getSmsText(int $status, array $cfg, array $mappings, Order $order): ?string {
         $text = null;
 
         if (array_key_exists($status, $mappings)) {
-            $cfgKey = 'sms77textOn' . $mappings[$status];
+            $cfgKey = 'seventextOn' . $mappings[$status];
 
             if (array_key_exists($cfgKey, $cfg)) {
                 $text = $cfg[$cfgKey];
             }
         }
 
-        if (array_key_exists('sms77signature', $cfg)
-            && '' !== $cfg['sms77signature']) {
-            $text = 'prepend' === $cfg['sms77signaturePosition']
-                ? $text . $cfg['sms77signature']
-                : $cfg['sms77signature'] . $text;
+        if (array_key_exists('sevensignature', $cfg)
+            && '' !== $cfg['sevensignature']) {
+            $text = 'prepend' === $cfg['sevensignaturePosition']
+                ? $text . $cfg['sevensignature']
+                : $cfg['sevensignature'] . $text;
         }
 
         foreach (explode(' ', $text) as $word) {
@@ -143,8 +143,8 @@ class Util {
     public static function getExtras(array $config): array {
         $extras = [];
 
-        if (isset($config['sms77from'])) {
-            $extras['from'] = $config['sms77from'];
+        if (isset($config['sevenfrom'])) {
+            $extras['from'] = $config['sevenfrom'];
         }
 
         return $extras;

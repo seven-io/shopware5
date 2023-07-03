@@ -1,24 +1,24 @@
 {
     "authors": [
         {
-            "name": "André Matthies",
-            "email": "a.matthies@sms77.io",
-            "homepage": "https://www.www.sms77.io",
+            "name": "seven communications GmbH & Co. KG",
+            "email": "support@seven.io",
+            "homepage": "https://www.www.seven.io",
             "role": "Developer"
         }
     ],
     "support": {
-        "email": "support@sms77.io",
-        "rss": "https://www.sms77.io/en/feed/",
-        "docs": "https://www.sms77.io/en/docs/"
+        "email": "support@seven.io",
+        "rss": "https://www.seven.io/en/feed/",
+        "docs": "https://www.seven.io/en/docs/"
     },
-    "name": "sms77/shopware5-plugin",
-    "description": "Shopware 5 plugin to programmatically make us of the sms77io SMS gateway",
+    "name": "seven.io/shopware5",
+    "description": "Shopware 5 plugin to programmatically make us of the seven SMS gateway",
     "keywords": [
         "shopware",
         "sms"
     ],
-    "homepage": "https://www.sms77.io",
+    "homepage": "https://www.seven.io",
     "type": "shopware-backend-plugin",
     "license": "MIT",
     "require": {
@@ -29,6 +29,6 @@
         "ext-json": "*"
     },
     "extra": {
-        "installer-name": "Sms77ShopwareApi"
+        "installer-name": "SevenShopwareApi"
     }
 }

@@ -48,8 +48,8 @@
         <div class="panel-body">
             <p>Sends a SMS to all of your customers at once.</p>
 
-            {if {config name=sms77apiKey}|count_characters}
-                <form class="form-horizontal sms77-bulk-form" method="post">
+            {if {config name=sevenapiKey}|count_characters}
+                <form class="form-horizontal seven-bulk-form" method="post">
                     <div class="form-group">
                         <label for="text" class="col-sm-2 control-label">Message
                             Content</label>
@@ -93,7 +93,7 @@
 
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="from" name="from"
-                                   value="{config name=sms77from}">
+                                   value="{config name=sevenfrom}">
                         </div>
                     </div>
 
@@ -110,7 +110,7 @@
 
                     <p>
                         An API key is required in order to send SMS. Get yours now @
-                        www.sms77.io.
+                        www.seven.io.
                     </p>
                 </div>
             {/if}

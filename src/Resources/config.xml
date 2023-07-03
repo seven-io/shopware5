@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/config.xsd">
     <elements>
         <element type="boolean">
-            <name>sms77enabled</name>
+            <name>sevenenabled</name>
             <label lang="de">Aktiviert</label>
             <label>Enabled</label>
             <value>0</value>
@@ -12,17 +12,17 @@
         </element>
 
         <element>
-            <name>sms77apiKey</name>
+            <name>sevenapiKey</name>
             <label lang="de">API-Schlüssel</label>
             <label>API key</label>
             <description lang="de">Ein API-Schlüssel wird benötigt um SMS senden zu können. Erfahren Sie mehr auf
-                sms77.io.
+                seven.io.
             </description>
-            <description>An API key is needed in order to send SMS. Get yours now at sms77.io.</description>
+            <description>An API key is needed in order to send SMS. Get yours now at seven.io.</description>
         </element>
 
         <element type="select">
-            <name>sms77events</name>
+            <name>sevenevents</name>
             <label lang="de">Ereignisse</label>
             <label>Events</label>
             <description lang="de">Definiert die Ereignisse zum Versenden von SMS.</description>
@@ -107,7 +107,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnDocumentCreatedInvoice</name>
+            <name>seventextOnDocumentCreatedInvoice</name>
             <label lang="de">Nachricht b. Erstellung v. Rechnungerstellungs-Dokument</label>
             <label>Invoice created message</label>
             <value>Dear customer. A new invoice has been generated. Log in to your account in order to see it. Best regards!
@@ -117,7 +117,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnDocumentCreatedDeliveryNotice</name>
+            <name>seventextOnDocumentCreatedDeliveryNotice</name>
             <label lang="de">Nachricht b. Erstellung v. Auslieferbeleg-Dokument</label>
             <label>Delivery notice created message</label>
             <value>Dear customer. A delivery notice document has been generated. Log in to your account in order to see it. Best regards!
@@ -127,7 +127,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnDocumentCreatedCredit</name>
+            <name>seventextOnDocumentCreatedCredit</name>
             <label lang="de">Nachricht b. Erstellung v. Gutschrift-Dokument</label>
             <label>Credit document created message</label>
             <value>Dear customer. A credit document has been generated. Log in to your account in order to see it. Best regards!
@@ -137,7 +137,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnDocumentCreatedCancellation</name>
+            <name>seventextOnDocumentCreatedCancellation</name>
             <label lang="de">Nachricht b. Erstellung v. Storno-Dokument</label>
             <label>Cancellation document created message</label>
             <value>Dear customer. A cancellation document has been generated. Log in to your account in order to see it. Best regards!
@@ -147,7 +147,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnOrderStateCancelled</name>
+            <name>seventextOnOrderStateCancelled</name>
             <label lang="de">Stornonachricht</label>
             <label>Cancellation message</label>
             <value>Dear customer. We are sorry about the cancelled order. We hope to serve you again soon. Best regards!
@@ -157,7 +157,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnOrderStateReadyForDelivery</name>
+            <name>seventextOnOrderStateReadyForDelivery</name>
             <label lang="de">Versandnachricht</label>
             <label>Shipping message</label>
             <value>Dear customer. Your order is ready to be shipped. Log in to your customer account for more information. Best regards!
@@ -167,7 +167,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnOrderStateCompletelyDelivered</name>
+            <name>seventextOnOrderStateCompletelyDelivered</name>
             <label lang="de">Ausliefernachricht</label>
             <label>Delivery message</label>
             <value>Dear customer. Your order has just been delivered by our logistics partner. Thank you for shopping. Enjoy your goods and best regards!
@@ -177,7 +177,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnOrderStateClarificationRequired</name>
+            <name>seventextOnOrderStateClarificationRequired</name>
             <label lang="de">Klärungsnachricht</label>
             <label>Clarification message</label>
             <value>Dear customer. Your order needs some clarification. Please contact us as soon as possible in order to get your order fulfilled. Best regards!
@@ -187,7 +187,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnPaymentState1stReminder</name>
+            <name>seventextOnPaymentState1stReminder</name>
             <label lang="de">Erinnerungsnachricht #1</label>
             <label>1st reminder message</label>
             <value>Dear customer. This is just a little reminder that your order still needs to be paid before it gets shipped. Best regards!
@@ -197,7 +197,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnPaymentState2ndReminder</name>
+            <name>seventextOnPaymentState2ndReminder</name>
             <label lang="de">Erinnerungsnachricht #2</label>
             <label>2nd reminder message</label>
             <value>Dear customer. We hereby inform you again that your order is still unpaid as of now. Please hurry in order to get it shipped quickly. Best regards!
@@ -207,7 +207,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnPaymentState3rdReminder</name>
+            <name>seventextOnPaymentState3rdReminder</name>
             <label lang="de">Erinnerungsnachricht #3</label>
             <label>3rd reminder message</label>
             <value>Dear customer. This is the last chance for you to pay for your order before we can finally ship it to you. Best regards!
@@ -217,7 +217,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77textOnSaveOrder</name>
+            <name>seventextOnSaveOrder</name>
             <label lang="de">Bestellnachricht</label>
             <label>Save order message</label>
             <value>Dear customer. Thanks for placing your order with us. Best regards!</value>
@@ -226,7 +226,7 @@
         </element>
 
         <element>
-            <name>sms77from</name>
+            <name>sevenfrom</name>
             <label lang="de">Absenderkennung</label>
             <label>Sender</label>
             <description lang="de">Definiert die Absenderkennung der übermittelten Nachrichten.</description>
@@ -234,7 +234,7 @@
         </element>
 
         <element type="textarea">
-            <name>sms77signature</name>
+            <name>sevensignature</name>
             <label lang="de">Signatur</label>
             <label>Signature</label>
             <value/>
@@ -243,7 +243,7 @@
         </element>
 
         <element type="select">
-            <name>sms77signaturePosition</name>
+            <name>sevensignaturePosition</name>
             <label lang="de">Signatur-Position</label>
             <label>Signature Position</label>
             <description lang="de">Bestimmt, wo die Signatur in der Nachricht eingefügt wird.</description>

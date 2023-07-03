@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Sms77ShopwareApi;
+namespace SevenShopwareApi;
 
 class StringUtil {
     public static function startsWith(string $haystack, string $needle): bool {

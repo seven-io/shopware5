@@ -4,14 +4,14 @@
 >
     <entries>
         <entry>
-            <name>Sms77ApiPlugin</name>
-            <label>Sms77ApiPlugin</label>
-            <label lang="de">Sms77ApiPlugin</label>
-            <controller>Sms77Api</controller>
+            <name>SevenApiPlugin</name>
+            <label>SevenApiPlugin</label>
+            <label lang="de">SevenApiPlugin</label>
+            <controller>SevenApi</controller>
             <action>index</action>
             <class>sprite-application-block</class>
             <parent identifiedBy="controller">Marketing</parent>
-            <onclick>Shopware.ModuleManager.createSimplifiedModule("Sms77Api", { "title": "sms77io" })
+            <onclick>Shopware.ModuleManager.createSimplifiedModule("SevenApi", { "title": "seven" })
             </onclick>
         </entry>
     </entries>

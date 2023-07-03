@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>sms77io</title>
+    <title>seven</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{link file="backend/_resources/css/bootstrap.min.css"}">
@@ -9,8 +9,8 @@
 <body role="document" style="padding-top: 80px">
 
 <div class="container theme-showcase" role="main">
-    <img src="{link file="backend/_resources/img/sms77-Logo-400x79.png"}"
-         alt="sms77io Logo"/>
+    <img src="{link file="backend/_resources/img/logo.png"}"
+         alt="seven Logo"/>
 
     {block name="content/main"}{/block}
 </div>

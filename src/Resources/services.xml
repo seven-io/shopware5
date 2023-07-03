@@ -3,11 +3,11 @@
            xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sms77_api.subscriber.order" class="Sms77ShopwareApi\Subscriber\OrderSubscriber">
+        <service id="seven_api.subscriber.order" class="SevenShopwareApi\Subscriber\OrderSubscriber">
             <tag name="doctrine.event_subscriber"/>
         </service>
 
-        <service id="sms77_api.subscriber.document" class="Sms77ShopwareApi\Subscriber\DocumentSubscriber">
+        <service id="seven_api.subscriber.document" class="SevenShopwareApi\Subscriber\DocumentSubscriber">
             <argument type="service" id="pluginlogger"/>
             <argument type="service" id="models"/>
 
